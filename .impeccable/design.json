@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T18:50:44Z",
+  "title": "Design System: Magellan Research Companion",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f7f8f6",
+        "tonalRamp": ["#18201e", "#303936", "#505a57", "#77817e", "#a1aaa7", "#c5ccca", "#e3e7e5", "#f7f8f6"]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#181b1a", "#353837", "#565a59", "#7c807f", "#a5a8a7", "#cacccb", "#e8e9e9", "#ffffff"]
+      },
+      "carbon-ink": {
+        "role": "neutral",
+        "displayName": "Carbon Ink",
+        "canonical": "#17201e",
+        "tonalRamp": ["#111816", "#17201e", "#31403d", "#566460", "#7e8a86", "#aab3b0", "#d5dad8", "#f1f4f2"]
+      },
+      "graphite-muted": {
+        "role": "neutral",
+        "displayName": "Muted Graphite",
+        "canonical": "#52615e",
+        "tonalRamp": ["#15201e", "#293633", "#52615e", "#71807c", "#93a09c", "#b8c1be", "#dce1df", "#f2f5f4"]
+      },
+      "graphite-quiet": {
+        "role": "neutral",
+        "displayName": "Quiet Graphite",
+        "canonical": "#5f6c69",
+        "tonalRamp": ["#17211f", "#2e3a37", "#4a5754", "#5f6c69", "#88938f", "#adb6b3", "#d3d9d7", "#f0f3f2"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Graphite Rule",
+        "canonical": "#cfd8d5",
+        "tonalRamp": ["#17201e", "#303b38", "#53615d", "#798783", "#9faaa7", "#bac4c1", "#cfd8d5", "#f2f5f4"]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Graphite Rule",
+        "canonical": "#879994",
+        "tonalRamp": ["#15201d", "#2c3c38", "#4b5d58", "#687b76", "#879994", "#aab7b3", "#d1d8d6", "#f1f4f3"]
+      },
+      "evidence-teal": {
+        "role": "primary",
+        "displayName": "Evidence Teal",
+        "canonical": "#0d685b",
+        "tonalRamp": ["#06211d", "#073b33", "#0a554a", "#0d685b", "#318b7d", "#70b2a6", "#b4d8d1", "#e8f4f1"]
+      },
+      "evidence-teal-soft": {
+        "role": "primary",
+        "displayName": "Soft Evidence Wash",
+        "canonical": "#dcebe6",
+        "tonalRamp": ["#09231e", "#104036", "#285f53", "#4c8074", "#7aa79d", "#accbc4", "#dcebe6", "#f0f7f5"]
+      },
+      "focus-amber": {
+        "role": "secondary",
+        "displayName": "Focus Amber",
+        "canonical": "#a34f00",
+        "tonalRamp": ["#321600", "#572600", "#7c3900", "#a34f00", "#c97322", "#e5a063", "#f2cda6", "#fbefe1"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Paper Display", "purpose": "The exact paper title only." },
+      "headline": { "displayName": "Section Headline", "purpose": "Major research-section headings." },
+      "body": { "displayName": "Reading Body", "purpose": "Long-form research explanation and captions." },
+      "lead": { "displayName": "Abstract Lead", "purpose": "The concise opening contribution statement." },
+      "label": { "displayName": "Running Label", "purpose": "Figure names, action labels, navigation, and metadata." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "document-scroll", "value": "smooth", "purpose": "Default in-page anchor movement; disabled when reduced motion is preferred." }
+    ],
+    "breakpoints": [
+      { "name": "reading-column", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Wordmark",
+      "kind": "nav",
+      "description": "The sole illustrative signature: a line-drawn globe and orbit arrow paired with the Magellan name.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\"><svg class=\"ds-wordmark-mark\" viewBox=\"0 0 40 40\" aria-hidden=\"true\"><circle cx=\"20\" cy=\"20\" r=\"11.5\"></circle><path d=\"M8.6 20h22.8M20 8.6c4 3.1 6.1 7 6.1 11.4S24 28.3 20 31.4c-4-3.1-6.1-7-6.1-11.4S16 11.7 20 8.6Z\"></path><path class=\"ds-wordmark-orbit\" d=\"M5.4 12.1C10.7 5 23 2.8 31.1 8.4\"></path><path class=\"ds-wordmark-orbit\" d=\"m28.6 5.6 3.2 3-4.1 1.6\"></path></svg><span>Magellan</span></a>",
+      "css": ".ds-wordmark { display: inline-flex; align-items: center; gap: .7rem; color: var(--ink, #17201e); font: 700 1rem/1 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; letter-spacing: -.015em; text-decoration: none; } .ds-wordmark-mark { width: 2rem; height: 2rem; fill: none; stroke: var(--evidence, #0d685b); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.45; } .ds-wordmark-orbit { stroke-width: 1.8; } .ds-wordmark:hover { text-decoration: none; } .ds-wordmark:focus-visible { outline: 2px solid var(--focus, #a34f00); outline-offset: 4px; border-radius: 2px; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "description": "Quiet section anchors that frame the document without reading as a promotional header.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Research sections\"><a href=\"#\">Abstract</a><a href=\"#\">Results</a><a href=\"#\">Method</a><a href=\"#\">Figures</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2rem; font: 400 .78rem/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; } .ds-nav a { color: var(--muted, #52615e); text-decoration: none; } .ds-nav a:hover { color: var(--ink, #17201e); } .ds-nav a:focus-visible { outline: 2px solid var(--focus, #a34f00); outline-offset: 4px; border-radius: 2px; }"
+    },
+    {
+      "name": "Evidence Link",
+      "kind": "button",
+      "refersTo": "evidence-link",
+      "description": "A compact text action for opening a poster, image, or vector evidence file.",
+      "html": "<a class=\"ds-evidence-link\" href=\"#\">View the research poster <span aria-hidden=\"true\">↗</span></a>",
+      "css": ".ds-evidence-link { width: fit-content; color: var(--evidence, #0d685b); font: 650 .83rem/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; text-decoration-color: color-mix(in srgb, currentColor 42%, transparent); text-decoration-thickness: 1px; text-underline-offset: .2em; } .ds-evidence-link:hover { text-decoration-color: currentColor; } .ds-evidence-link:focus-visible { outline: 2px solid var(--focus, #a34f00); outline-offset: 4px; border-radius: 2px; }"
+    },
+    {
+      "name": "Result Row",
+      "kind": "custom",
+      "refersTo": "result-metric",
+      "description": "A measured outcome coupled directly to its experiment and baseline context.",
+      "html": "<dl class=\"ds-result\"><div><dt><strong>13×</strong> carbon reduction</dt><dd>Reduced emissions by up to 13× in the CloudLab evaluation.</dd></div></dl>",
+      "css": ".ds-result { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-block: 1px solid var(--line, #cfd8d5); } .ds-result > div { padding: 2.25rem; } .ds-result > div + div { border-left: 1px solid var(--line, #cfd8d5); } .ds-result dt { color: var(--ink, #17201e); font: 650 1.05rem/1.3 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; } .ds-result strong { display: block; margin-bottom: .8rem; color: var(--evidence, #0d685b); font-size: 5rem; font-weight: 700; line-height: .86; letter-spacing: -.04em; font-variant-numeric: tabular-nums; } .ds-result dd { max-width: 63ch; margin: 1.25rem 0 0; color: var(--muted, #52615e); font: 400 .92rem/1.65 \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif; }"
+    },
+    {
+      "name": "Decision Flow",
+      "kind": "custom",
+      "description": "Continue, pause, and migrate presented as three independent open sections on one shared row.",
+      "html": "<ol class=\"ds-decision\"><li><h3>Continue</h3><p>Keep the workload at its current site.</p></li><li><h3>Pause</h3><p>Checkpoint work when waiting is preferable.</p></li><li><h3>Migrate</h3><p>Transfer state after destination acceptance.</p></li></ol>",
+      "css": ".ds-decision { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin: 0; padding: 0; list-style: none; } .ds-decision li { padding: 1.4rem 0 1.75rem; border-top: 2px solid var(--evidence, #0d685b); border-bottom: 1px solid var(--line, #cfd8d5); } .ds-decision h3 { margin: 0; color: var(--ink, #17201e); font: 650 1.08rem/1.3 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; letter-spacing: -.01em; } .ds-decision p { margin: .9rem 0 0; color: var(--muted, #52615e); font: 400 1rem/1.65 \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif; }"
+    },
+    {
+      "name": "Decision Model Note",
+      "kind": "custom",
+      "refersTo": "model-note",
+      "description": "A two-column explanation that separates the score, its three-objective legend, and its feasibility constraints.",
+      "html": "<div class=\"ds-model-note\"><div><h3>One score for every feasible action</h3><p>The same three objectives are compared.</p></div><div><p class=\"ds-equation\">S(x) = αT(x) + βC(x) + γ$(x)</p><dl><div><dt>T</dt><dd>completion time</dd></div><div><dt>C</dt><dd>lifecycle carbon</dd></div><div><dt>$</dt><dd>monetary cost</dd></div></dl></div></div>",
+      "css": ".ds-model-note { display: grid; grid-template-columns: minmax(14rem, .7fr) minmax(24rem, 1.3fr); gap: 4rem; padding: 1.7rem 0 1.8rem; border-block: 1px solid var(--line-strong, #879994); } .ds-model-note h3 { margin: 0 0 .65rem; font: 500 1.35rem/1.2 \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif; } .ds-model-note p { margin: 0; color: var(--muted, #52615e); } .ds-model-note .ds-equation { margin-bottom: 1.15rem; padding: .8rem 1rem; background: var(--evidence-soft, #dcebe6); color: var(--ink, #17201e); font: 600 1.8rem/1.25 \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif; letter-spacing: -.025em; } .ds-model-note dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 0; } .ds-model-note dl div { display: grid; grid-template-columns: 1.3rem minmax(0, 1fr); gap: .35rem; } .ds-model-note dt { color: var(--evidence, #0d685b); font-weight: 700; } .ds-model-note dd { margin: 0; color: var(--muted, #52615e); font-size: .83rem; }"
+    },
+    {
+      "name": "Replay Record",
+      "kind": "custom",
+      "refersTo": "figure-surface",
+      "description": "A full-width recorded research replay with native controls, a representative poster frame, and explicit simulation context.",
+      "html": "<figure class=\"ds-replay\"><video controls preload=\"metadata\" playsinline poster=\"replay-poster.webp\"><source src=\"replay.mp4\" type=\"video/mp4\"></video><figcaption><span>Calibrated migration replay</span><p>Recorded simulation, not live execution.</p><a href=\"replay.mp4\">Open MP4 ↗</a></figcaption></figure>",
+      "css": ".ds-replay { margin: 0; padding: 1.25rem 0 3.5rem; border-top: 1px solid var(--line, #cfd8d5); } .ds-replay video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #07131f; } .ds-replay video > p, .ds-replay video > p a { color: var(--sheet, #fff); } .ds-replay video > p { padding: 1.5rem; } .ds-replay video:focus-visible { outline: 2px solid var(--focus, #a34f00); outline-offset: 4px; } .ds-replay figcaption { display: grid; grid-template-columns: minmax(12rem, .45fr) minmax(18rem, 1fr) max-content; gap: 2rem; padding-top: 1.25rem; align-items: start; }"
+    },
+    {
+      "name": "Figure Record",
+      "kind": "card",
+      "refersTo": "figure-surface",
+      "description": "A full-width research figure followed by a label, interpretation, and evidence link without a card frame.",
+      "html": "<figure class=\"ds-figure\"><div class=\"ds-figure-image\" role=\"img\" aria-label=\"Research figure placeholder\">FULL-WIDTH RESEARCH FIGURE</div><figcaption><span>Policy comparison</span><p>Experiment interpretation remains attached to the supplied figure.</p><a href=\"#\">Open vector PDF ↗</a></figcaption></figure>",
+      "css": ".ds-figure { margin: 0; padding: 1.25rem 0 3.5rem; border-top: 1px solid var(--line, #cfd8d5); } .ds-figure-image { display: grid; place-items: center; min-height: 12rem; background: var(--sheet, #fff); color: var(--quiet, #5f6c69); font: 700 .75rem/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; letter-spacing: .07em; } .ds-figure figcaption { display: grid; grid-template-columns: minmax(12rem, .45fr) minmax(18rem, 1fr) max-content; gap: 2rem; padding-top: 1.25rem; align-items: start; } .ds-figure figcaption > span { color: var(--ink, #17201e); font: 700 .75rem/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; letter-spacing: .07em; text-transform: uppercase; } .ds-figure p { max-width: 62ch; margin: 0; color: var(--muted, #52615e); font: 400 .9rem/1.65 \"Iowan Old Style\", \"Palatino Linotype\", Palatino, Georgia, serif; } .ds-figure a { color: var(--evidence, #0d685b); font: 650 .75rem/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif; text-underline-offset: .2em; } .ds-figure a:hover { text-decoration-color: currentColor; } .ds-figure a:focus-visible { outline: 2px solid var(--focus, #a34f00); outline-offset: 4px; border-radius: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Camera-Ready Companion",
+    "overview": "Magellan translates the composure of proceedings front matter into a responsive research microsite. The system feels exact, quiet, and visibly academic: crisp paper, carbon ink, graphite rules, generous margins, and one restrained evidence color let the research figures and qualified measurements carry the page.\n\nThe interface avoids promotional hero language, conversion patterns, ornamental cards, and decorative illustration. Its only signature mark is a small globe crossed by an orbital arrow, connecting geographic movement to the research subject without competing with the evidence.",
+    "keyCharacteristics": [
+      "Paper-like surfaces with square, rule-led structure.",
+      "Editorial serif reading type paired with plain sans-serif metadata.",
+      "Deep teal reserved for evidence, links, and the migration mark.",
+      "Wide scholarly layouts that collapse into one disciplined reading column.",
+      "Figures presented at full readable width with experiment context attached."
+    ],
+    "rules": [
+      { "name": "The One Evidence Color Rule", "body": "Deep teal is the only expressive page color; it signals evidence and navigation rather than decoration.", "section": "colors" },
+      { "name": "The Qualification Contrast Rule", "body": "Supporting copy may recede to graphite, but quantitative qualifications must remain clearly readable against paper.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Serif communicates the research argument; sans-serif organizes the apparatus around it.", "section": "typography" },
+      { "name": "The Numeric Authority Rule", "body": "Key measurements use tabular numerals, strong weight, and evidence teal so comparison is immediate without inflating the surrounding prose.", "section": "typography" },
+      { "name": "The Open Page Rule", "body": "Create hierarchy with measure, alignment, whitespace, and rules—not with nested cards.", "section": "layout" },
+      { "name": "The Flat Evidence Rule", "body": "Research artifacts remain on the reading plane; never imply importance through drop shadows or floating panels.", "section": "elevation" },
+      { "name": "The Square Page Rule", "body": "Borders terminate cleanly and surfaces remain square; curved geometry belongs to the orbital mark alone.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do use strong rules and generous section spacing to make the page scan like a proceedings companion.",
+      "Do keep experiment context attached to every quantitative result and figure.",
+      "Do reserve evidence teal for links, measurements, action labels, venue metadata, and the orbital mark.",
+      "Do preserve the serif/sans division between research argument and interface metadata.",
+      "Do let supplied figures occupy the full readable width of the content container."
+    ],
+    "donts": [
+      "Don't introduce promotional heroes, conversion calls to action, feature-card grids, or commercial landing-page language.",
+      "Don't add shadows, pill shapes, rounded cards, gradients, or competing accent colors.",
+      "Don't use the globe-and-orbit motif as repeating decoration; it is a singular identifying mark.",
+      "Don't separate a reported measurement from its baseline or experimental qualification.",
+      "Don't compress long-form reading beyond a comfortable 70-character measure or shrink figure evidence into thumbnails."
+    ]
+  }
+}

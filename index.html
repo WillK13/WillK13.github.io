@@ -1,22 +1,151 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Magellan V2: decentralized carbon-aware scheduling for long-running stateful workloads. SC26 Student Research Competition."><title>Magellan · SC26 Student Research Competition</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Magellan V2: decentralized carbon-aware scheduling for long-running stateful workloads. SC26 Student Research Competition.">
+  <meta name="theme-color" content="#f7f8f6">
+  <title>Magellan: A Carbon-Aware Task Scheduler for Geo-Distributed Systems</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<header><a class="brand" href="#">magellan<span>↗</span></a><nav aria-label="Main navigation"><a href="#approach">Approach</a><a href="#results">Results</a><a href="#resources">Resources</a></nav></header>
-<main>
-<section class="hero"><div class="eyebrow">SC26 · STUDENT RESEARCH COMPETITION</div><h1>Follow cleaner energy.<br><em>Keep the work moving.</em></h1><p class="intro">Magellan is a carbon-aware scheduler for long-running, stateful workloads across geographically distributed sites. V2 brings scheduling and capacity arbitration to the peers themselves.</p><div class="author">Will Kaminski <span> / </span> Tufts University</div><div class="actions"><a class="button" href="#approach">Explore Magellan <span>↓</span></a><a class="textlink" href="#results">See the evaluation ↗</a></div><div class="hero-foot"><span>CONTINUE</span><i>·</i><span>PAUSE</span><i>·</i><span>MIGRATE</span><p>Three actions. One multi-objective decision.</p></div></section>
-<section class="context"><div class="eyebrow">THE CHALLENGE</div><h2>The same computation.<br>A different carbon footprint.</h2><p>Electricity carbon intensity changes across regions and over time. Moving a running job can reach cleaner electricity, but checkpointing, transfer, restoration, and slower hardware can erase the benefit. Magellan weighs these overheads before acting.</p></section>
-<section id="approach"><div class="section-top"><div><div class="eyebrow">01 / APPROACH</div><h2>A scheduler at every site.</h2></div><p>Local decisions. Destination capacity checks.<br>Explicit transfer of task ownership.</p></div>
-<div class="architecture"><div class="peer"><span class="site-label">SOURCE SITE</span><h3>Peer A</h3><div class="modules"><span>Scheduler</span><span>Arbiter</span><span>Runtime</span><span>Registry</span></div><p>Evaluates continue, pause, and migrate.</p></div><div class="exchange"><strong>Migration bid →</strong><span>← Accept / reject</span><strong>Checkpoint + ownership →</strong></div><div class="peer"><span class="site-label">DESTINATION SITE</span><h3>Peer B</h3><div class="modules"><span>Scheduler</span><span>Arbiter</span><span>Runtime</span><span>Registry</span></div><p>Arbitrates incoming bids against capacity.</p></div></div>
-<div class="steps"><article><span>01</span><h3>Compare the actions</h3><p>Predict completion time, lifecycle carbon, and monetary cost. Score each feasible action using weighted objectives and a cost cap.</p><code>S(x) = αT(x) + βC(x) + γ$(x)</code></article><article><span>02</span><h3>Ask the destination</h3><p>The source scheduler submits a migration bid. The destination arbiter accepts or rejects it based on available resources and competing bids.</p></article><article><span>03</span><h3>Move the running state</h3><p>Pre-stage datasets and models, checkpoint the task, transfer its state, and restore execution. Transfer ownership after an accepted migration.</p></article></div><p class="note">Migration-gap and improvement thresholds reduce unnecessary movement. The decision model accounts for checkpoint, transfer, restore, and regional runtime differences.</p></section>
-<section id="results"><div class="section-top"><div><div class="eyebrow">02 / EVALUATION</div><h2>Benefits meet real constraints.</h2></div><p>Policy comparisons, measured capacity,<br>and control-plane scaling.</p></div><div class="highlights"><article><strong>57.9% → 9.9%</strong><p>Carbon savings as initial measured cluster CPU demand rises from 25.3% to 88.4% in the capacity comparison.</p></article><article><strong>406 ms</strong><p>Median scheduling epoch latency at 100 tasks in the control-plane scaling experiment.</p></article><article><strong>12.1% → 2.2%</strong><p>Lower lifecycle carbon per task at populations of 25 and 100, compared with the static resource queue.</p></article></div>
-<div class="figures">
-<figure class="wide"><div class="figure-heading"><span>POLICY COMPARISON</span><a href="assets/core_policy_comparison.pdf">Open PDF ↗</a></div><a href="assets/core_policy_comparison.png"><img src="assets/core_policy_comparison.png" alt="Makespan, lifecycle carbon, and cost ratios for Boston static, best static, GAIA Carbon-Time, and Magellan."></a><figcaption>Compare makespan, lifecycle carbon, and cost against Boston static. A lower ratio is better; the GAIA makespan annotation reports 3.99×.</figcaption></figure>
-<figure class="wide"><div class="figure-heading"><span>CAPACITY SENSITIVITY</span><a href="assets/utilization_capacity_comparison.pdf">Open PDF ↗</a></div><a href="assets/utilization_capacity_comparison.png"><img src="assets/utilization_capacity_comparison.png" alt="Carbon ratio versus static as CPU demand increases: capacity-aware savings fall from 57.9 percent to 9.9 percent."></a><figcaption>Capacity limits reduce opportunities to move work to cleaner sites. The unlimited reference shows the opportunity when destination capacity is unconstrained.</figcaption></figure>
-<figure><div class="figure-heading"><span>CONTROL PLANE</span><a href="assets/control_plane_scaling.pdf">Open PDF ↗</a></div><a href="assets/control_plane_scaling.png"><img loading="lazy" src="assets/control_plane_scaling.png" alt="Median and 95th percentile epoch latency at 25, 50, and 100 tasks; 406 milliseconds median at 100."></a><figcaption>Scheduling epoch latency across task populations. This measures control-plane work, rather than end-to-end migration time.</figcaption></figure>
-<figure><div class="figure-heading"><span>CARBON AT SCALE</span><a href="assets/scaling_static_vs_magellan.pdf">Open PDF ↗</a></div><a href="assets/scaling_static_vs_magellan.png"><img loading="lazy" src="assets/scaling_static_vs_magellan.png" alt="Lifecycle carbon per task for static resource queue and Magellan at 25, 50, and 100 tasks."></a><figcaption>Per-task lifecycle carbon relative to a static resource queue. Savings narrow as the task population increases.</figcaption></figure></div>
-<p class="note">These figures report separate experiments with their own baselines. Percentages above are taken from the supplied figure annotations and should be interpreted within those experiments.</p></section>
-<section class="workloads"><div class="eyebrow">WORKLOADS & TESTBED</div><h2>Built for work with state.</h2><div class="steps"><article><h3>LLM fine-tuning</h3><p>Long-running training workloads whose execution state must survive a move.</p></article><article><h3>Scientific computing</h3><p>Dendro numerical-relativity workloads and synthetic benchmarks for runtime and migration measurements.</p></article><article><h3>Distributed infrastructure</h3><p>CloudLab migration experiments and geographically distributed GCP sites, with regional carbon traces and measured overheads.</p></article></div></section>
-<section id="resources" class="resources"><div><div class="eyebrow">03 / RESOURCES</div><h2>Inspect the evidence.</h2><p>Download the original vector figures for a closer look.</p></div><div class="resource-links"><a href="assets/core_policy_comparison.pdf">Policy comparison <span>PDF ↗</span></a><a href="assets/utilization_capacity_comparison.pdf">Capacity sensitivity <span>PDF ↗</span></a><a href="assets/control_plane_scaling.pdf">Control-plane scaling <span>PDF ↗</span></a><a href="assets/scaling_static_vs_magellan.pdf">Lifecycle carbon at scale <span>PDF ↗</span></a></div></section>
-</main><footer><a class="brand" href="#">magellan<span>↗</span></a><p>Carbon-aware, geo-distributed scheduling · V2</p><a href="https://github.com/WillK13/WillK13.github.io">Website source ↗</a></footer>
-</body></html>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Magellan, back to top">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="11.5"></circle>
+        <path d="M8.6 20h22.8M20 8.6c4 3.1 6.1 7 6.1 11.4S24 28.3 20 31.4c-4-3.1-6.1-7-6.1-11.4S16 11.7 20 8.6Z"></path>
+        <path class="orbit" d="M5.4 12.1C10.7 5 23 2.8 31.1 8.4"></path>
+        <path class="arrow" d="m28.6 5.6 3.2 3-4.1 1.6"></path>
+      </svg>
+      <span>Magellan</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#abstract">Abstract</a>
+      <a href="#results">Results</a>
+      <a href="#method">Method</a>
+      <a href="#figures">Figures</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <article>
+      <header class="paper-header">
+        <h1>Magellan: A Carbon-Aware Task Scheduler for Geo-Distributed Systems</h1>
+        <div class="byline">
+          <p><strong>Will Kaminski</strong> · Student</p>
+          <p><strong>Hari Sundar</strong> · Advisor</p>
+          <p>Tufts University</p>
+          <p class="venue-inline">SC26 Student Research Competition</p>
+        </div>
+        <a class="paper-link" href="final_poster.pdf">View the research poster <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <section id="abstract" class="abstract section-rule">
+        <h2>Abstract</h2>
+        <div class="reading-column">
+          <p class="lead">Magellan is a carbon-aware decentralized scheduler for long-running, stateful workloads across geographically distributed sites. Magellan includes scheduling and capacity arbitration at each peer.</p>
+          <p>Electricity carbon intensity changes across regions and over time. Moving a running job can unlock cleaner electricity, but checkpointing, transfer, restoration, and slower hardware can erase the benefit. Magellan compares those costs before choosing whether a workload should continue, pause, or migrate.</p>
+        </div>
+      </section>
+
+      <section id="results" class="key-results section-rule" aria-labelledby="results-heading">
+        <div class="section-heading">
+          <h2 id="results-heading">Key results</h2>
+          <p>Best observed outcomes, shown with their experimental context.</p>
+        </div>
+        <dl class="result-list">
+          <div>
+            <dt><strong>13×</strong> carbon reduction</dt>
+            <dd>Reduced emissions by up to 13× in the Google GCP evaluation while jointly accounting for makespan and monetary cost.</dd>
+          </div>
+          <div>
+            <dt><strong>11.6%</strong> lower makespan</dt>
+            <dd>Reported alongside the maximum carbon reduction at similar cost in the poster's summary evaluation.</dd>
+          </div>
+          <div>
+            <dt><strong>57.9%</strong> capacity-aware savings</dt>
+            <dd>At low utilization, falling to 9.9% near cluster saturation without destination oversubscription; scaling was evaluated through 100 concurrent tasks.</dd>
+          </div>
+        </dl>
+        <p class="qualification">These measurements come from separate experiments with their own baselines.</p>
+      </section>
+
+      <section id="method" class="method section-rule">
+        <div class="section-heading">
+          <h2>How Magellan decides</h2>
+          <p>Three possible actions, evaluated as one multi-objective decision.</p>
+        </div>
+        <ol class="decision-flow">
+          <li><h3>Continue</h3><p>Keep the workload at its current site when moving would not improve the weighted outcome enough.</p></li>
+          <li><h3>Pause</h3><p>Pause computation to allow for local conditions to improve.</p></li>
+          <li><h3>Migrate</h3><p>Bid for destination capacity, transfer state, restore execution, and hand off ownership after acceptance.</p></li>
+        </ol>
+        <div class="model-note">
+          <div class="model-intro">
+            <h3>One score for every feasible action</h3>
+            <p>Magellan compares the same three objectives before choosing continue, pause, or migrate.</p>
+          </div>
+          <div class="model-equation">
+            <p class="equation" aria-label="Score of x equals alpha times completion time plus beta times lifecycle carbon plus gamma times monetary cost"><var>S</var>(<var>x</var>) = <var>αT</var>(<var>x</var>) + <var>βC</var>(<var>x</var>) + <var>γ$</var>(<var>x</var>)</p>
+            <dl class="equation-key">
+              <div><dt>T</dt><dd>completion time</dd></div>
+              <div><dt>C</dt><dd>lifecycle carbon</dd></div>
+              <div><dt>$</dt><dd>monetary cost</dd></div>
+            </dl>
+            <p class="model-constraint">Only feasible actions are scored; capacity, the cost cap, and migration-overhead guardrails still apply.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="figures" class="figures section-rule">
+        <div class="section-heading">
+          <h2>Evaluation figures</h2>
+          <p>The supplied figures are shown at full readable width. Select any figure to open the original image.</p>
+        </div>
+
+        <figure class="replay-figure">
+          <video controls preload="metadata" playsinline poster="media/magellan-replay-visualization-u75-summer-poster.webp" aria-label="Recorded Stage 4D.3 calibrated simulation replay showing tasks and accepted migrations across geographic sites">
+            <source src="media/magellan-replay-visualization-u75-summer.mp4" type="video/mp4">
+            <p>Your browser cannot play this video. <a href="media/magellan-replay-visualization-u75-summer.mp4">Download the MP4 replay</a>.</p>
+          </video>
+          <figcaption><span>Calibrated migration replay</span><p>Recorded simulation at 75.8% initial measured CPU utilization. Nine tasks move across the geo-distributed sites as Magellan accepts migrations and transfers task ownership.</p><a href="media/magellan-replay-visualization-u75-summer.mp4">Open MP4 <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+
+        <figure>
+          <a href="core_policy_comparison.png"><img src="core_policy_comparison.png" width="1800" height="1335" alt="Makespan, lifecycle carbon, and cost ratios for Boston static, best static, GAIA Carbon-Time, and Magellan."></a>
+          <figcaption><span>Policy comparison</span><p>Makespan, lifecycle carbon, and cost relative to Boston static, the static of the greenest location, and a copy of GAIA (Pause only). Lower ratios are better; the GAIA makespan annotation reports 3.99×.</p><a href="core_policy_comparison.pdf">Open vector PDF <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+
+        <figure>
+          <a href="utilization_capacity_comparison.png"><img src="utilization_capacity_comparison.png" width="1800" height="942" alt="Carbon ratio versus static as CPU demand increases; capacity-aware savings fall from 57.9 percent to 9.9 percent."></a>
+          <figcaption><span>Capacity sensitivity</span><p>Capacity limits reduce opportunities to move work to cleaner sites. The unlimited reference shows the opportunity when destination capacity is unconstrained.</p><a href="utilization_capacity_comparison.pdf">Open vector PDF <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+
+        <figure>
+          <a href="control_plane_scaling.png"><img src="control_plane_scaling.png" width="1800" height="776" alt="Median and 95th percentile scheduling epoch latency at 25, 50, and 100 tasks; median latency is 406 milliseconds at 100 tasks."></a>
+          <figcaption><span>Control-plane scaling</span><p>Scheduling epoch latency across task populations, measuring control-plane work rather than end-to-end migration time.</p><a href="control_plane_scaling.pdf">Open vector PDF <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+
+        <figure>
+          <a href="scaling_static_vs_magellan.png"><img src="scaling_static_vs_magellan.png" width="1800" height="794" alt="Lifecycle carbon per task for the static resource queue and Magellan at populations of 25, 50, and 100 tasks."></a>
+          <figcaption><span>Lifecycle carbon at scale</span><p>Per-task lifecycle carbon relative to a static resource queue. Savings narrow as the task population increases.</p><a href="scaling_static_vs_magellan.pdf">Open vector PDF <span aria-hidden="true">↗</span></a></figcaption>
+        </figure>
+      </section>
+
+      <section class="citation section-rule" aria-labelledby="citation-heading">
+        <h2 id="citation-heading">Research materials</h2>
+        <p>Will Kaminski · Hari Sundar · Tufts University · SC26 Student Research Competition</p>
+        <div class="resource-actions">
+          <a href="https://sc26.conference-program.com/presentation/?id=src_post173&amp;sess=sess313" target="_blank" rel="noreferrer">View the SC26 program <span aria-hidden="true">↗</span></a>
+          <a href="final_poster.pdf">Download the poster <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <a class="wordmark" href="#top"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="11.5"></circle><path d="M8.6 20h22.8M20 8.6c4 3.1 6.1 7 6.1 11.4S24 28.3 20 31.4c-4-3.1-6.1-7-6.1-11.4S16 11.7 20 8.6Z"></path><path class="orbit" d="M5.4 12.1C10.7 5 23 2.8 31.1 8.4"></path><path class="arrow" d="m28.6 5.6 3.2 3-4.1 1.6"></path></svg><span>Magellan</span></a>
+    <p>Carbon-aware migration of stateful workloads</p>
+  </footer>
+</body>
+</html>
